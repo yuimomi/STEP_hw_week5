@@ -16,7 +16,7 @@ def generate_sample_output():
             tour = solver.solve(cities)
             with open(f'sample/{name}_{i}.csv', 'w') as f:
                 f.write(format_tour(tour) + '\n')
-        tour = solver_me.solve_with_2opt()
+        tour = solver_me.solve_with_2opt(cities)
         with open(f'visualizer/output_{i}.csv', 'w') as f:
             f.write(format_tour(tour) + '\n')
 

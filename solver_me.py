@@ -28,14 +28,16 @@ def apply_2opt_exchange(tour, i, j):
     tour[i + 1: j + 1] = tmp
     return tour
 
-def solve_with_2opt(tour, dist):
+def solve_with_2opt(cities):
+    tour = solve(cities)
+    dist = dist = set_dist(cities)
     N = len(tour)
     cost_best = 0
     i_best, j_best = None, None
     
     for i in range(0, N-2):
         for j in range(i+2, N):
-            if i == 0 and j ==N-1:
+            if i == 0 and j == N-1:
                 continue
             
             cost = calculate_2opt_cost(tour, i, j, dist)
@@ -47,11 +49,12 @@ def solve_with_2opt(tour, dist):
         tour_new = apply_2opt_exchange(tour, i_best, j_best)
         return tour_new
     else:
-        return None
+        return tour
 
 if __name__ == '__main__':
     assert len(sys.argv) > 1
-    tour = solve(read_input(sys.argv[1]))
-    dist = set_dist(read_input(sys.argv[1]))
-    solve_with_2opt(tour, dist)
-    print_tour(tour)
+    cities = read_input(sys.argv[1])
+    #tour = solve(read_input(sys.argv[1]))
+    #dist = set_dist(read_input(sys.argv[1]))
+    tour_new = solve_with_2opt(cities)
+    print_tour(tour_new)
